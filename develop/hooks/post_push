@@ -6,9 +6,7 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-# Tag and push image for each additional tag
-for tag in {develop}; do
-    docker tag $IMAGE_NAME ${repoName}:${tag}
-    docker push ${repoName}:${tag}
-done
+# Tag and push image
+    docker tag $IMAGE_NAME ${repoName}:develop
+    docker push ${repoName}:develop
 
