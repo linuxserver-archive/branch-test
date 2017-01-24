@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION_TAG${IMAGE_NAME#*:}
+VERSION_TAG=${IMAGE_NAME#*:}
 
 docker build --build-arg VERSION=$VERSION_TAG \
 --build-arg BUILD_DATE=`date -u +%B-%d-%Y-%H:%M:%S-UTC` -t $IMAGE_NAME .
