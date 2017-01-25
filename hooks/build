@@ -3,14 +3,13 @@
 VERSION_TAG=${IMAGE_NAME#*:}
 SONARR_BRANCH=${VERSION_TAG%-*}
 
-if [[ $VERSION_TAG != *[0-9]* ]]; then
-unset SONARR_BUILD
-else
-SONARR_BUILD=${VERSION_TAG#*-}
+DOCKER_BUILD_ARGS+=( --build-arg VERSION=$VERSION_TAG --build-arg SONARR_BRANCH=${SONARR_BRANCH})
+
+if [[ $SONARR_BRANCH  == *[0-9]* ]]; then
+SONARR_BUILD=${SONARR_BRANCH#*-}
+DOCKER_BUILD_ARGS+=( --build-arg SONARR_BUILD=${SONARR_BUILD} )
 fi
 
 docker build \
---build-arg SONARR_BRANCH=$SONARR_BRANCH \
---build-arg SONARR_BUILD=$SONARR_BUILD \
---build-arg VERSION=$VERSION_TAG \
+${DOCKER_BUILD_ARGS[*]} \
 --build-arg BUILD_DATE=`date -u +%B-%d-%Y-%H:%M:%S-UTC` -t $IMAGE_NAME .
