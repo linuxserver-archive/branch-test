@@ -7,6 +7,7 @@ if [[ $VERSION_TAG != *[0-9]* ]]; then
 SONARR_BUILD=""
 else
 SONARR_BUILD=${VERSION_TAG#*-}
+SONARR_BUILD=${SONARR_BUILD+=$SONARR_BUILD}
 fi
 
 docker build \
