@@ -2,7 +2,7 @@
 
 DOCKER_BUILD_ARGS+=( --build-arg SONARR_BRANCH=${SONARR_BRANCH})
 
-if [[ ! - z $SONARR_BUILD && $SONARR_BUILD  == *[0-9]* ]]; then
+if [[ ! -z $SONARR_BUILD && $SONARR_BUILD  == *[0-9]* ]]; then
 DOCKER_BUILD_ARGS+=( --build-arg SONARR_BUILD=${SONARR_BUILD} )
 fi
 
