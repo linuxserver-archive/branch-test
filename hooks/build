@@ -13,4 +13,4 @@ SONARR_BUILD=${SONARR_BRANCH#*-}
 DOCKER_BUILD_ARGS+=( --build-arg SONARR_BUILD=${SONARR_BUILD} )
 fi
 
-docker build ${DOCKER_BUILD_ARGS[*]} -t $IMAGE_NAME .
+docker build ${DOCKER_BUILD_ARGS[@]} -t $IMAGE_NAME .
