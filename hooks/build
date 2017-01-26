@@ -8,11 +8,11 @@ SONARR_BUILD=${VERSION_TAG#*-}
 
 BUILD_DATE=$(date -u +%B-%d-%Y-%H:%M:%S-UTC)
 
-DOCKER_BUILD_ARGS=( --build-arg VERSION=${VERSION_TAG} --build-arg SONARR_BRANCH=${SONARR_BRANCH})
-DOCKER_BUILD_ARGS+=( --build-arg BUILD_DATE=${BUILD_DATE})
+DOCKER_BUILD_ARGS=( "--build-arg VERSION=${VERSION_TAG}" "--build-arg SONARR_BRANCH=${SONARR_BRANCH}")
+DOCKER_BUILD_ARGS+=( "--build-arg BUILD_DATE=${BUILD_DATE}")
 
-if [[ $SONARR_BUILD =~ [0-9.] ]]; then
-DOCKER_BUILD_ARGS+=( --build-arg SONARR_BUILD=${SONARR_BUILD})
+if [[ ${SONARR_BUILD} =~ [0-9.] ]]; then
+DOCKER_BUILD_ARGS+=( "--build-arg SONARR_BUILD=${SONARR_BUILD}")
 fi
 
-docker build ${DOCKER_BUILD_ARGS[@]} -t $IMAGE_NAME .
+docker build "${DOCKER_BUILD_ARGS[@]}" -t "$IMAGE_NAME" .
