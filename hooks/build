@@ -1,22 +1,7 @@
 #!/bin/bash
 
-VERSION_TAG=${IMAGE_NAME#*:}
-SONARR_BRANCH=${VERSION_TAG%-*}
-
-BUILD_DATE=`date -u +%B-%d-%Y-%H:%M:%S-UTC`
-
-if [[ ${SONARR_BRANCH}  == *[:digit:]* ]]; then
-SONARR_BUILD=${SONARR_BRANCH#*-}
-DOCKER_BUILD_ARGS=\
---build-arg VERSION=${VERSION_TAG} \
---build-arg SONARR_BRANCH=${SONARR_BRANCH} \
---build-arg SONARR_BUILD=${SONARR_BUILD} \
---build-arg BUILD_DATE=${BUILD_DATE}
-else
-DOCKER_BUILD_ARGS=\
---build-arg VERSION=${VERSION_TAG} \
---build-arg SONARR_BRANCH=${SONARR_BRANCH} \
---build-arg BUILD_DATE=${BUILD_DATE}
-fi
-
-docker build ${DOCKER_BUILD_ARGS} -t $IMAGE_NAME .
+docker build \
+--build-arg VERSION="master-2.0.0.3953" \
+--build-arg SONARR_BRANCH="master" \
+--build-arg SONARR_BUILD="2.0.0.3953" \
+-t $IMAGE_NAME .
