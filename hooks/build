@@ -7,16 +7,16 @@ BUILD_DATE=`date -u +%B-%d-%Y-%H:%M:%S-UTC`
 
 if [[ ${SONARR_BRANCH}  ==*[0-9]* ]]; then
 SONARR_BUILD=${SONARR_BRANCH#*-}
-DOCKER_BUILD_ARGS="\
+DOCKER_BUILD_ARGS=\
 --build-arg VERSION=${VERSION_TAG} \
 --build-arg SONARR_BRANCH=${SONARR_BRANCH} \
 --build-arg SONARR_BUILD=${SONARR_BUILD} \
---build-arg BUILD_DATE=${BUILD_DATE}"
+--build-arg BUILD_DATE=${BUILD_DATE}
 else
-DOCKER_BUILD_ARGS="\
+DOCKER_BUILD_ARGS=\
 --build-arg VERSION=${VERSION_TAG} \
 --build-arg SONARR_BRANCH=${SONARR_BRANCH} \
---build-arg BUILD_DATE=${BUILD_DATE}"
+--build-arg BUILD_DATE=${BUILD_DATE}
 fi
 
 docker build ${DOCKER_BUILD_ARGS} -t $IMAGE_NAME .
