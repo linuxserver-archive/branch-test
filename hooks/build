@@ -2,13 +2,16 @@
 
 VERSION_TAG=${IMAGE_NAME#*:}
 
-BUILD_DATE=$(date -u +%B-%d-%Y-%H:%M:%S-UTC)
 
 SONARR_BRANCH=${VERSION_TAG%-*}
 SONARR_BUILD=${VERSION_TAG#*-}
-DOCKER_BUILD_ARGS=( --build-arg VERSION=${VERSION_TAG} --build-arg SONARR_BRANCH=${SONARR_BRANCH} --build-arg BUILD_DATE=${BUILD_DATE})
 
-if [[ $SONARR_BUILD == *[^0-9]* ]]; then
+BUILD_DATE=$(date -u +%B-%d-%Y-%H:%M:%S-UTC)
+
+DOCKER_BUILD_ARGS=( --build-arg VERSION=${VERSION_TAG} --build-arg SONARR_BRANCH=${SONARR_BRANCH})
+DOCKER_BUILD_ARGS+=( --build-arg BUILD_DATE=${BUILD_DATE})
+
+if [[ $SONARR_BUILD =~ [0-9.] ]]; then
 DOCKER_BUILD_ARGS+=( --build-arg SONARR_BUILD=${SONARR_BUILD})
 fi
 
