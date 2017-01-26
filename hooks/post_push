@@ -21,7 +21,7 @@ tag=develop
     docker push ${repoName}:${tag}
 }
 
-if [[ $TAG_TEST =~ *master* ]]; then
+if [[ $TAG_TEST == *"master"* ]]; then
 tag_master
 else
 tag_develop
