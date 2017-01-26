@@ -5,10 +5,25 @@ set -e
 # Parse image name for repo name
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
+TAG_TEST==${IMAGE_NAME#*:}
 
-# Tag and push image for each additional tag
-for tag in {main,latest}; do
+
+tag_master () {
+for tag in {master,latest}; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
+}
+
+tag_develop () {
+tag=develop
+    docker tag $IMAGE_NAME ${repoName}:${tag}
+    docker push ${repoName}:${tag}
+}
+
+if [[ $TAG_TEST =~ *master* ]]; then
+tag_master
+else
+tag_develop
+fi
 
