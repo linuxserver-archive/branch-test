@@ -1,7 +1,9 @@
 #!/bin/bash
 
+
+
 docker build \
---build-arg VERSION="master-2.0.0.3953" \
+--build-arg VERSION="${IMAGE_NAME}" \
 --build-arg SONARR_BRANCH="master" \
 --build-arg SONARR_BUILD="2.0.0.3953" \
 -t $IMAGE_NAME .
