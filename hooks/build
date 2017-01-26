@@ -13,6 +13,3 @@ DOCKER_BUILD_ARGS=("--build-arg VERSION=${VERSION_TAG}" "--build-arg SONARR_BRAN
 fi
 
 docker build ${DOCKER_BUILD_ARGS}[@] -t $IMAGE_NAME .
-
-
-
