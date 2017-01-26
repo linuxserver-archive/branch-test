@@ -5,7 +5,7 @@ SONARR_BRANCH=${VERSION_TAG%-*}
 
 BUILD_DATE=`date -u +%B-%d-%Y-%H:%M:%S-UTC`
 
-if [[ ${SONARR_BRANCH}  == *[0-9]* ]]; then
+if [[ ${SONARR_BRANCH}  ==*[0-9]* ]]; then
 SONARR_BUILD=${SONARR_BRANCH#*-}
 DOCKER_BUILD_ARGS="\
 --build-arg VERSION=${VERSION_TAG} \
