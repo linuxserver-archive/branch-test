@@ -22,6 +22,7 @@ RUN \
 
 # install packages
  SONARR_BUILD_TAG="${SONARR_BUILD+=$SONARR_BUILD}" && \
+ echo $SONARR_BUILD_TAG && \
  apt-get update && \
  apt-get install -y \
 	libcurl3 \
